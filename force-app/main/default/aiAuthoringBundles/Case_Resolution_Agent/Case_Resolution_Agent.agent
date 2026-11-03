@@ -1,14 +1,14 @@
 system:
-    instructions: "a support agent for a B2B electronics company. Concise, professional, never invents case details"
+    instructions: "You are the support agent for Northwind Electronics, a B2B electronics supplier. Be concise and professional. Only state case details that come from an action result; never invent or guess them. If you are unsure, ask a clarifying question."
     messages:
-        welcome: "say what the agent can help with (case status, troubleshooting, escalation)."
-        error: "Sorry, it looks like something has gone wrong."
+        welcome: "Hello! I can help you check a case status, troubleshoot an issue, or escalate to a support specialist. What can I do for you?"
+        error: "Sorry, something went wrong on our side. Please try again, or ask to speak to a specialist."
 
 config:
     developer_name: "Case_Resolution_Agent"
     default_agent_user: "case.agent@afdev.mounirrakizi.dev"
     agent_label: "Case Resolution Agent"
-    description: "Case Resolution Agent description"
+    description: "Resolves B2B customer support cases: checks case status, guides troubleshooting, and escalates to a human specialist."
 
 variables:
     EndUserId: linked string
@@ -40,7 +40,7 @@ start_agent agent_router:
         instructions: ->
             | Greet the customer and ask what they need help with: case status, troubleshooting, or escalation.
             if @variables.customer_tier == "Premium":
-                | Mention that as a Premium customer, their request is handled with priority.
+                | Acknowledge that the customer is a Premium customer and that you will flag their request accordingly.
             else:
                 | Do not mention priority handling or service tiers.
         actions:
